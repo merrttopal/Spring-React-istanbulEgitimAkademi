@@ -3,7 +3,7 @@ package appPack;
 public class MainApp {
     public static void main(String[] args) {
 
-        Square square = new Square();
+        Square square = new Square(4);
 
         Circle circle = new Circle();
 
@@ -15,8 +15,10 @@ public class MainApp {
 
 }
     public static void call(Drawing drawing){
-
         drawing.draw();
-
+        if(drawing instanceof Square){
+            Square square = (Square) drawing;
+            square.action(10);
+        }
     }
 }
