@@ -6,7 +6,7 @@ public class MainAbstract {
     // Normal sınıf davranışı gösterirler
     // Gövdesiz (soyut) methodlar kurulmak istendiğinde abstract anahtar kelimesi kullanılır
     // Miras verildiğinde soyut methodlar override edilmek zorundadır
-  
+
     public static void main(String[] args) {
 
         Person person = new Person(200);
