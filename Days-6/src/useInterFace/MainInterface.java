@@ -13,6 +13,18 @@ public class MainInterface {
         IProfile user2 = new UserImpl();
         user2.userProfileName(1);
 
+        // interface to class
+        IUser iUser = new IUser() {
+            @Override
+            public String userName(int uId) {
+                return null;
+            }
+
+            @Override
+            public int userAge(int uId) {
+                return 0;
+            }
+        };
 
 
 

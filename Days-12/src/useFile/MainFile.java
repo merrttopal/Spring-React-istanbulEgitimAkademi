@@ -1,5 +1,6 @@
 package useFile;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MainFile {
@@ -21,12 +22,12 @@ public class MainFile {
            dataStore.addData(ex.getStackTrace()[0].toString());
        }
 
- *//*
-        dataStore.addData("new line note");
+ */
+        dataStore.addData(Arrays.asList("mert", "topal,30"));
         dataStore.readData();
         List<String > ls = dataStore.readData();
         System.out.println(ls);
-        */
+
         List<String> lsx = dataStore.allReadData();
         System.out.println(lsx);
 

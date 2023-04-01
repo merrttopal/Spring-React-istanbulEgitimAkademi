@@ -47,7 +47,7 @@ public class MainArrayList {
         list.contains("Istanbul");
         System.out.println("Contain status: " + list.contains("Istanbul"));
 
-        // addAll -> bir listenin bu lise içine eklenmesi
+        // addAll -> bir listenin başka bir  liste içine eklenmesi
         List<String> ls = new ArrayList<>();
         ls.add("1");
         ls.add("2");

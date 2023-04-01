@@ -13,6 +13,7 @@ public class BankCustomer {
     // Uygulama açık olduğu sürece ölmezler
     // İçindeki değerler istenilen her yerde değiştirilebilir
 
+
     static String name = "Mert";
     String city = "istanbul";
 

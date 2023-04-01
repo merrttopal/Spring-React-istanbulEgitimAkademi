@@ -34,6 +34,10 @@ public class MainMethod {
         String name = action.useSettings(settings);
 
 
+        Action action1 = new Action();
+        action.useSettings(settings);
+
+
     }
 
 

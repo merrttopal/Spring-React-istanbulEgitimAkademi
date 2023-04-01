@@ -2,6 +2,7 @@ package useFile;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -55,11 +56,15 @@ public class DataStore {
         return false;
     }
 
-    public void addData(String data) {
+    public void addData(List<String> data) {
         try {
             //  if(file.canWrite()){
             FileWriter writer = new FileWriter(file, true);
-            writer.append(data + System.lineSeparator());
+            data = new LinkedList<>();
+            data.add(0, data.toString());
+            data.add(1, data.toString());
+            data.add(2, data.toString());
+            writer.append(data.toString());
             writer.close();
             //   }
         } catch (Exception e) {
@@ -83,69 +88,6 @@ public class DataStore {
         }
         return ls;
     }
-
-
-    /*
-    public void indexFile() {
-        File file = new File(fileName);
-        try (FileReader fileReader = new FileReader(file);
-             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-            String line;
-            int lineNum = 0;
-            while ((line = bufferedReader.readLine()) != null) {
-                lineNum++;
-                System.out.println("Line " + lineNum + ": " + line);
-            }
-        } catch (Exception e) {
-            System.out.println("Error reading file: " + e.getMessage());
-        }
-    }
-    public ArrayList<String> getFileNames(String dirPath) {
-        ArrayList<String> fileNames = new ArrayList<>();
-        File dir = new File(dirPath);
-        File[] files = dir.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                fileNames.add(file.getName());
-            }
-        }
-        return fileNames;
-    }
-
-
-    public void exploreFiles(String dirPath) {
-        File dir = new File(dirPath);
-        File[] files = dir.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    System.out.println("[Directory] " + file.getName() + " at " + LocalDateTime.now());
-                    System.out.println("Files in " + file.getName() + ":");
-                    File[] subFiles = file.listFiles();
-                    if (subFiles != null) {
-                        for (File subFile : subFiles) {
-                            System.out.println("- " + subFile.getName());
-                        }
-                    }
-                    System.out.println();
-                } else {
-                    System.out.println("[File] " + file.getName() + " at " + LocalDateTime.now());
-                    System.out.println("Content of " + file.getName() + ":");
-                    try {
-                        List<String> lines = Files.readAllLines(Paths.get(file.getAbsolutePath()));
-                        for (String line : lines) {
-                            System.out.println(line);
-                        }
-                    } catch (IOException e) {
-                        System.out.println("Error reading file: " + e.getMessage());
-                    }
-                    System.out.println();
-                }
-            }
-        }
-    }
-
-     */
 
     public List<String> allReadData(){
         List<String> ls = new ArrayList<>();
