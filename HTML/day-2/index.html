@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="site.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <!-- <base href="https://www.google.com.tr/"> -->
+</head>
+<body>
+<h1 class="tracking-in-expand" > Welcome Site </h1>
+<h1 class="title tracking-in-expand" > Welcome Site </h1>
+
+<table class="tg">
+    <thead>
+    <tr>
+        <th class="tg-0lax">id</th>
+        <th class="tg-0lax">Name</th>
+        <th class="tg-0lax">Surname</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="tg-0lax">1</td>
+        <td class="tg-0lax">Mert</td>
+        <td class="tg-0lax">Topal</td>
+    </tr>
+    <tr>
+        <td class="tg-0lax">2</td>
+        <td class="tg-0lax">Enes</td>
+        <td class="tg-0lax">Efe</td>
+    </tr>
+    </tbody>
+</table>
+
+<a target="_blank" class="vibrate-3" href="http://google.com.tr">Goto Google</a>
+<a target="_blank" class="vibrate-3" href="imghp">Google Base</a>
+<a class="vibrate-3" href="about.html">About Us</a>
+<a class="vibrate-3" href="https://docs.spring.io/spring-framework/docs/2.5.x/spring-reference.pdf">PDF</a>
+<a class="vibrate-3" href="site.zip">Zip</a>
+
+<div    style="clear: both">
+
+    <a href="mailto:merrt.topal@gmail.com" >
+        <img src="img/mail.png" width="50"></a>
+
+    <a href="tel:05387923174">
+        <img src="img/phone.png" width="50"></a>
+
+    <a href="index.html">
+        <img src="img/sample.gif" width="100"></a>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/D0UnqGm_miA"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+
+    <span class="material-symbols-outlined">
+cookie
+</span>
+
+    <span class="material-symbols-outlined">
+clear_day
+</span>
+    <hr/>
+    <form action="/register" method="post" autocomplete="off" >
+        <h2>Register</h2>
+        <input required name="email" type="email" placeholder="E-mail" > <br/> <br/>
+        <input required name="password" type="password" placeholder="password" > <br/><br/>
+        <input required readonly name="name" type="text" value="Mert Topal"  > <br/><br/>
+        <input  required name="code" minlength="3" maxlength="3" placeholder="Code...(3 Char)" type="text"><br/><br/>
+        <textarea placeholder="Detail" rows="10" cols="21"> </textarea><br/><br/>
+
+        <input type="checkbox" name = "Futbol" id = "Futbol"> <label for="Futbol"> Futbol</label>
+        <input type="checkbox" name = "Basketbol" id = "Basketbol"><label for = "Basketbol"> Basketbol</label>
+        <input type="checkbox" name = "Yuzme" id = "Yuzme"><label for = "Yuzme"> Yüzme</label><br/><br/>
+
+        <input required type="radio" name="Akademi" value="ilkokul" id="ilkokul"> <label for="ilkokul">İlkokul</label>
+        <input required type="radio" name="Akademi" value="ortaokul" id="ortaokul"> <label for="ortaokul">Ortaokul</label>
+        <input required type="radio" name="Akademi" value="lise" id="lise"> <label for="lise">lise</label>
+        <input required type="radio" name="Akademi" value="lise" id="universite"> <label for="universite">Üniversite</label><br/><br/>
+        <select required name="City" id="">
+            <option value="">Selected</option>
+            <option value="istanbul">İstanbul</option>
+            <option value="ankara">ankara</option>
+            <option value="izmir">izmir</option>
+            <option value="bursa">bursa</option>
+        </select> <br><br>
+        <button class="submit" type="submit"></button>
+        <button class="reset" type="reset"></button>
+        <input type="hidden" name="hiddenname " value="asdqwe">
+
+
+    </form>
+    <hr>
+    <video class="rotate-hor-center" src="media/video.mp4" controls width="600"></video>
+    <br><br>
+    <audio src="media/muzik.mp3" controls ></audio>
+    <hr/>
+
+</div>
+</body>
+</html>
