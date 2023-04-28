@@ -35,7 +35,11 @@ public class HomeController {
         }
         return "redirect:/";
     }
-
+    @GetMapping("/userDelete/undelete/{uid}")
+    public String undelete(@PathVariable int uid) {
+        status = service.undeleteUser(uid);
+        return "redirect:/";
+    }
 
 
 }

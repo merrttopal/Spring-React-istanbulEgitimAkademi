@@ -9,4 +9,5 @@ public class Users {
     private String surname;
     private String email;
     private String date;
+    private int deletedUsers;
 }
