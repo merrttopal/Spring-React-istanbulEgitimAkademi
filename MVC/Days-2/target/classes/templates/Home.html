@@ -14,27 +14,27 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container">
+    <div class="container">
+        <div th:replace="inc/navbar">
 
-    <th:block th:if="${status != null}">
-        <th:block th:if="${ status == 0 }">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> <span th:text="${message}"></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        </div>
+
+
+
+        <th:block th:if="${status != null}">
+            <th:block th:if="${ status == 0 }">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> <span th:text="${message}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </th:block>
+            <th:block th:if="${ status > 0 }">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> <span th:text="${message}"></span> <a class="btn btn-link" th:href="${'/userBack/'+ uid}">Back</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </th:block>
         </th:block>
-        <th:block th:if="${ status > 0 }">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> <span th:text="${message}"></span>
-                <th:block th:each="item : ${users}">
-                    <th:block th:if="${item.deletedUsers != 0}">
-                        <a th:href="${'/userDelete/undelete/'+item.uid}" role="button" type="submit" class="btn btn-warning btn-sm">Undelete</a>
-                    </th:block>
-                </th:block>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </th:block>
-    </th:block>
 
     <table class="table table-hover">
         <thead>
@@ -45,11 +45,9 @@
             <th scope="col">Surname</th>
             <th scope="col">Email</th>
             <th scope="col">Date</th>
-            <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody th:if="${users != null}">
-
         <tr th:each="item, iter : ${users}">
             <th scope="row" th:text="${iter.count}"></th>
             <th scope="row" th:text="${item.uid}"></th>
@@ -61,7 +59,6 @@
                 <a th:href="${'/userDelete/'+item.uid}" role="button" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
-
         </tbody>
     </table>
 

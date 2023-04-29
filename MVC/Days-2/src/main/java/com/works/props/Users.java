@@ -8,6 +8,8 @@ public class Users {
     private String name;
     private String surname;
     private String email;
+    private String password;
+    private Integer age;
     private String date;
-    private int deletedUsers;
+
 }

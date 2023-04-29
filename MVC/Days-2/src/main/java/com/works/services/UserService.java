@@ -14,37 +14,38 @@ public class UserService {
     DB db = new DB();
 
     public List<Users> users() {
+        List<Users> ls = new ArrayList<>();
+        DB db = new DB();
         try {
-            String sql = "select * from users";
+            String sql = "select * from users where status = 1";
             PreparedStatement pre = db.connect().prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                Users user = new Users();
-                user.setUid(rs.getInt("uid"));
-                user.setName(rs.getString("name"));
-                user.setSurname(rs.getString("surname"));
-                user.setEmail(rs.getString("email"));
-                user.setDate(rs.getString("date"));
-                ls.add(user);
-
+            while(rs.next()) {
+                Users u = new Users();
+                u.setUid( rs.getInt("uid") );
+                u.setName( rs.getString("name") );
+                u.setSurname( rs.getString("surname") );
+                u.setEmail( rs.getString("email") );
+                u.setDate( rs.getString("date") );
+                ls.add(u);
             }
-
-        } catch (Exception exception) {
-            System.err.println("Users Error " + exception);
-        } finally {
+        }catch (Exception ex) {
+            System.err.println("Users Error : " + ex);
+        }finally {
             db.close();
         }
         return ls;
     }
 
-    public int deleteUser(int uid) {
+    public int deleteUser(int uid, int dbStatus) {
         int status = 0;
+        DB db = new DB();
         try {
-            String sql = "update users set `deletedUsers` = 1 where uid = ?";
+            String sql = "update users set status = ? where uid = ?";
             PreparedStatement pre = db.connect().prepareStatement(sql);
-            pre.setInt(1,uid);
+            pre.setInt(1,dbStatus);
+            pre.setInt(2,uid);
             status = pre.executeUpdate();
-
         } catch (Exception ex) {
             System.out.println(ex);
         } finally {
@@ -56,9 +57,29 @@ public class UserService {
         int status = 0;
         DB db = new DB();
         try {
-            String sql = "update users set `deletedUsers` = 0 where uid = ?";
+            String sql = "update users set status = 0 where uid = ?";
             PreparedStatement pre = db.connect().prepareStatement(sql);
             pre.setInt(1,uid);
+            status = pre.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+        return status;
+    }
+    public int saveUser(Users user) {
+        System.out.println(user);
+        int status = 0;
+        DB db = new DB();
+        try {
+            String sql = "insert into users (uid,name,surname, email, password,status,date,age) values (null,?, ?, ?,?,?,now(),1)";
+            PreparedStatement pre = db.connect().prepareStatement(sql);
+            pre.setString(1, user.getName());
+            pre.setString(2, user.getSurname());
+            pre.setString(3, user.getEmail());
+            pre.setString(4, user.getPassword());
+            pre.setInt(5, user.getAge());
             status = pre.executeUpdate();
         } catch (Exception ex) {
             System.out.println(ex);
