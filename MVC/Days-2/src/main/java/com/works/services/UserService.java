@@ -13,12 +13,15 @@ public class UserService {
     List<Users> ls = new ArrayList<>();
     DB db = new DB();
 
-    public List<Users> users() {
+    public List<Users> users(int p) {
         List<Users> ls = new ArrayList<>();
         DB db = new DB();
         try {
-            String sql = "select * from users where status = 1";
+            p = p-1;
+            p = p*50;
+            String sql = "select * from users where status = 1 order by uid desc limit ?,50";
             PreparedStatement pre = db.connect().prepareStatement(sql);
+            pre.setInt(1,p);
             ResultSet rs = pre.executeQuery();
             while(rs.next()) {
                 Users u = new Users();
@@ -35,6 +38,25 @@ public class UserService {
             db.close();
         }
         return ls;
+    }
+
+    public int totalCount(){
+        int count = 0;
+        DB db = new DB();
+        try {
+            String sql =  "select count(uid) as count from  users where status = 1";
+            PreparedStatement pre = db.connect().prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()){
+                count = rs.getInt("count");
+            }
+
+        }catch (Exception e){
+            System.err.println(e);
+        }finally {
+            db.close();
+        }
+        return count;
     }
 
     public int deleteUser(int uid, int dbStatus) {
@@ -87,5 +109,29 @@ public class UserService {
             db.close();
         }
         return status;
+    }
+    public Users showUser(int uid){
+        Users user = new Users();
+        int status =0;
+        DB db = new DB();
+        try {
+            String sql = "select * from users where uid = ?";
+            PreparedStatement pre = db.connect().prepareStatement(sql);
+            pre.setInt(1, uid);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()){
+                user.setUid(rs.getInt(uid));
+                user.setName( rs.getString("name") );
+                user.setSurname( rs.getString("surname") );
+                user.setEmail( rs.getString("email") );
+                user.setDate( rs.getString("date") );
+            }
+
+        }catch (Exception e){
+            System.err.println(e);
+        }finally {
+            db.close();
+        }
+        return user;
     }
 }

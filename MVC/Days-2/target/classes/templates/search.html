@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -19,11 +19,12 @@
         <div th:replace="inc/navbar"></div>
 
 
+    <h2>Search <span th:if="${ q != null} " th:text="${'Search: '+ q }"></span></h2>
 
-    </div>
-    <h2>Search <h2 th:if="${q!= null} " th:text="${'Search: '+q}"></h2></h2>
     <th:block  th:if="${users == null && users.size() == 0}">
-        <div class="text-center"> Not Found!   </div>   </th:block>
+        <div class="text-center"> Not Found!   </div>
+    </th:block>
+
     <th:block th:if="${users != null && users.size() > 0}">
     <table class="table table-hover">
         <thead>
@@ -49,8 +50,7 @@
         </tbody>
     </table>
     </th:block>
-
-
+    </div>
 
 
 </body>

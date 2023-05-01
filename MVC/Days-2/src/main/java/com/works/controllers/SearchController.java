@@ -19,7 +19,7 @@ public class SearchController {
     public String search(@RequestParam(defaultValue = "") String q, Model model){
         List<Users> ls = service.searchlist(q);
         model.addAttribute("users",service.searchlist(q));
-        model.addAttribute("data",q);
+        model.addAttribute("data", q );
         return "search";}
 
 
