@@ -29,6 +29,8 @@ public class UserService {
                 u.setName( rs.getString("name") );
                 u.setSurname( rs.getString("surname") );
                 u.setEmail( rs.getString("email") );
+                u.setPassword( rs.getString("password") );
+                u.setAge( rs.getInt("age") );
                 u.setDate( rs.getString("date") );
                 ls.add(u);
             }
@@ -120,7 +122,7 @@ public class UserService {
             pre.setInt(1, uid);
             ResultSet rs = pre.executeQuery();
             if (rs.next()){
-                user.setUid(rs.getInt(uid));
+                user.setUid(rs.getInt("uid"));
                 user.setName( rs.getString("name") );
                 user.setSurname( rs.getString("surname") );
                 user.setEmail( rs.getString("email") );
@@ -134,4 +136,27 @@ public class UserService {
         }
         return user;
     }
+
+    public int updateUser(Users user) {
+        int status = 0;
+        DB db = new DB();
+        try {
+            String sql = "update users set name = ?, surname = ?, email= ?, password=?,age= ? where uid = ?";
+            PreparedStatement pre = db.connect().prepareStatement(sql);
+            pre.setString(1,user.getName());
+            pre.setString(2,user.getSurname());
+            pre.setString(3,user.getEmail());
+            pre.setString(4,user.getPassword());
+            pre.setInt(5,user.getAge());
+            pre.setInt(6,user.getUid());
+            status = pre.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+        return status;
+    }
+
+
 }

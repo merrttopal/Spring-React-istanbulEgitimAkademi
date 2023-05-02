@@ -66,5 +66,11 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @PostMapping("/userUpdate")
+    public String userUpdate(Users user){
+        service.updateUser(user);
+        return "redirect:/";
+    }
+
 
 }
