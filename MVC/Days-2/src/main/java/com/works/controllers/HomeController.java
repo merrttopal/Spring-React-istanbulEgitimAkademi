@@ -3,6 +3,7 @@ package com.works.controllers;
 import com.works.props.Users;
 import com.works.services.UserService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,15 +12,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
     UserService service = new UserService();
     int status = -1;
     String message = "";
     int uid = 0;
 
-
-    @GetMapping("/")
+    @GetMapping("/home")
     public String home(Model model, @RequestParam(defaultValue = "1") int p) {
         model.addAttribute("users", service.users(p));
         model.addAttribute("status", status);
@@ -55,7 +58,7 @@ public class HomeController {
         }else {
             message = "Delete Fail - " + uid;
         }
-        return "redirect:/";
+        return "redirect:/home";
     }
     @GetMapping("/userBack/{uid}")
     public String userBack(@PathVariable int uid) {
@@ -63,13 +66,13 @@ public class HomeController {
         service.deleteUser(uid, 1);
         UserService userService = new UserService();
         userService.showUser(uid);
-        return "redirect:/";
+        return "redirect:/home";
     }
 
     @PostMapping("/userUpdate")
     public String userUpdate(Users user){
         service.updateUser(user);
-        return "redirect:/";
+        return "redirect:/home";
     }
 
 
