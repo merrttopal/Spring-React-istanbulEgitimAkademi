@@ -16,7 +16,7 @@ public class RegisterController {
     String error = "";
     String success = "";
 
-    @GetMapping("/")
+    @GetMapping("/register")
     public String register(Model model){
         model.addAttribute("error", error);
         model.addAttribute("success",success);
@@ -27,7 +27,7 @@ public class RegisterController {
         return "register";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/registerCustomer")
     public String customerRegister(Customer customer){
         Customer c = customerService.save(customer);
         if( customer != null && c.getCid()== null){
