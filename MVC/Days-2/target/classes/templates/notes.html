@@ -49,19 +49,18 @@
                 </tr>
                 </thead>
 
-                <tr th:each="item, iter : ${notes}">
+                <tr th:each="notes, iter : ${notes}">
                     <th scope="row" th:text="${iter.count}"></th>
-                    <th scope="row" th:text="${item.nid}"></th>
-                    <td th:text="${item.title}"></td>
-                    <td th:text="${item.description}"></td>
+                    <th scope="row" th:text="${notes.nid}"></th>
+                    <td th:text="${notes.title}"></td>
+                    <td th:text="${notes.description}"></td>
                     <td>
-                        <a th:href="${'/deleteNote/'+item.nid}" role="button" class="btn btn-danger btn-sm">Delete</a>
+                        <a th:href="${'/deleteNote/'+notes.nid}" role="button" class="btn btn-danger btn-sm">Delete</a>
                     </td>
-
                 </table>
 
                 </div>
-        <hr>
+
 </div>
 
 </body>

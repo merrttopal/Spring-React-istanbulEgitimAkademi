@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class NotesController {
     int status = -1;
@@ -18,7 +20,9 @@ public class NotesController {
 
     NotesService notesService = new NotesService();
     @GetMapping("/notes")
-    public String notes(){
+    public String notes(Model model , Notes notes){
+        model.addAttribute("notes",notes);
+
         return "notes";
     }
 

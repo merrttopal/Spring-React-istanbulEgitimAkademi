@@ -1,6 +1,7 @@
 package com.works.controllers;
 
 import com.works.props.Users;
+import com.works.services.TinkEncDec;
 import com.works.services.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
+
     UserService service = new UserService();
     int status = -1;
     String message = "";
@@ -38,6 +40,9 @@ public class HomeController {
         status = -1;
         message = "";
         uid = 0;
+
+
+
         return "home";
     }
 

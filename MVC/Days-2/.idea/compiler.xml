@@ -10,10 +10,14 @@
         <module name="Days-2" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="MVC and JDBC Implementations" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Days-2" options="-parameters" />
+      <module name="MVC and JDBC Implementations" options="-parameters" />
     </option>
   </component>
 </project>
