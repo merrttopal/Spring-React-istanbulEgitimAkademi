@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class HomeController {
 
-    UserService service = new UserService();
+    final  UserService service;
     int status = -1;
     String message = "";
     int uid = 0;
@@ -69,8 +69,7 @@ public class HomeController {
     public String userBack(@PathVariable int uid) {
         Users users = new Users();
         service.deleteUser(uid, 1);
-        UserService userService = new UserService();
-        userService.showUser(uid);
+        service.showUser(uid);
         return "redirect:/home";
     }
 

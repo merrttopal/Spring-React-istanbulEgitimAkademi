@@ -14,6 +14,7 @@ public class TinkEncDec {
     @Value("${tink.associatedData}")
     private String associatedData;
 
+
     public String encrypt( String plainText ) {
         String cipherText = "";
         try {
@@ -40,6 +41,5 @@ public class TinkEncDec {
         }
         return planText;
     }
-
 
 }

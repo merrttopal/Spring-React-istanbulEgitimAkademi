@@ -16,7 +16,7 @@ import  java.io.IOException;
 @Configuration
 @RequiredArgsConstructor
 public class FilterConfig implements Filter {
-    UserService userService = new UserService();
+    final UserService userService;
     final TinkEncDec tinkEncDec;
 
     @Override

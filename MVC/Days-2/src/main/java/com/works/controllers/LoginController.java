@@ -15,9 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
-
+    final UserService service;
     final TinkEncDec tinkEncDec;
-    UserService service = new UserService();
     final HttpServletRequest request;
     final HttpServletResponse response;
 
