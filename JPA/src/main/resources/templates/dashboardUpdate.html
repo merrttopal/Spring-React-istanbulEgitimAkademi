@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Dashboard</h1>
+    <h1><a class="text-bg-dark text-decoration-none" href="/dashboard">Dashboard</a></h1>
     <section class="vh-50  gradient-custom">
         <div class="container py-5 h-100">
             <div class="row justify-content-center align-items-center h-100">
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="product-stock" class="form-label">Stock</label>
-                                    <input th:number="${product.getStock()}" type="number" class="form-control" id="product-stock" name="stock" required>
+                                    <input th:value="${product.getStock()}" type="number" class="form-control" id="product-stock" name="stock" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>

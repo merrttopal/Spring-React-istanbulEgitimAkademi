@@ -26,4 +26,6 @@ public class Product {
     @PositiveOrZero
     private Integer Stock;
 
+    private Long cid;
+
 }
