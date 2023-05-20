@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
+
      final CustomerService customerService;
      final HttpServletRequest request;
      final HttpServletResponse response;
@@ -32,26 +33,21 @@ public class LoginController {
 
     @PostMapping("/loginUser")
     public String loginUser(Customer customer){
-      Customer c = customerService.login(customer.getEmail(),customer.getPassword());
-      if(c== null){
-          Customer control = customerService.loginCustomer(customer.getEmail());
-          Cookie cookie = new Cookie("customer", ""+c.getCid());
-          cookie.setMaxAge(60 * 60);
-          response.addCookie(cookie);
-
-          if(control == null){
-              error = "Wrong Mail!";
-              return "redirect:/";
-          }else if (c.getCid() == null){
-              error = "Mail not found! Please Register.";
-              return "redirect:/";
-          }else {
-              error = "Wrong Password!";
-              return "redirect:/";
-          }
-      }
-      request.getSession().setAttribute("customer",c);
-      return "redirect:/dashboard";
+        Customer c = customerService.login(customer.getEmail(),customer.getPassword());
+        if(c == null){
+            // If the customer is null, it means either the email or the password is wrong
+            error = "Wrong email or password!";
+            return "redirect:/";
+        } else {
+            // If the customer is not null, it means the login was successful
+            // Create a cookie with the customer id and add it to the response
+            Cookie cookie = new Cookie("customer", ""+c.getCid());
+            cookie.setMaxAge(60 * 60);
+            response.addCookie(cookie);
+            // Set the customer as a session attribute and redirect to the dashboard
+            request.getSession().setAttribute("customer",c);
+            return "redirect:/dashboard";
+        }
     }
 
     @GetMapping("/logout")
