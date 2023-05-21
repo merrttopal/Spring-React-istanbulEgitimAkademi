@@ -1,10 +1,16 @@
 package com.works.jpa.service;
 
+import com.works.jpa.entities.Customer;
 import com.works.jpa.entities.Product;
 import com.works.jpa.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,19 +19,32 @@ import java.util.Optional;
 public class ProductService {
 
     final ProductRepository productRepository;
+    final HttpServletResponse response;
+    final HttpServletRequest request;
 
     public Product save(Product product){
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        product.setCid(customer.getCid());
         return productRepository.save(product);
     }
 
-    public List<Product> allProduct(Product products){
-        return productRepository.findAll();
+    public Page<Product> allProduct(int page){
+
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+
+        Pageable pageable = PageRequest.of(page,5);
+
+        Page<Product> productPage =productRepository.findByCidEqualsAllIgnoreCase(customer.getCid(),pageable);
+
+
+        return productPage;
     }
 
     public boolean deleteProduct(String stPid){
         try {
             long pid = Long.parseLong(stPid);
-            boolean status = productRepository.existsById(pid);
+            Customer customer = (Customer) request.getSession().getAttribute("customer");
+            boolean status = productRepository.existsByPidEqualsAndCidEquals(pid,customer.getCid());
             if(status){
                 productRepository.deleteById(pid);
                 return true;

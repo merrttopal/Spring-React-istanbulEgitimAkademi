@@ -20,6 +20,7 @@ public class RegisterController {
     public String register(Model model){
         model.addAttribute("error", error);
         model.addAttribute("success",success);
+        model.addAttribute("cid",1l);
         error = "";
         success = "";
         Customer c = customerService.login("","");

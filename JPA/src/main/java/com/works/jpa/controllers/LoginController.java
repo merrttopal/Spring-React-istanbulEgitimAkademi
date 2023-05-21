@@ -26,6 +26,7 @@ public class LoginController {
     public String login(Model model){
         model.addAttribute("error", error);
         model.addAttribute("success", success);
+
         error = "";
         success = "";
         return "login";
