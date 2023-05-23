@@ -69,10 +69,12 @@
                                         <th scope="col">Detail</th>
                                         <th scope="col">Stock</th>
                                         <th scope="col">Delete</th>
+                                        <th scope="col">Update</th>
+                                        <th scope="col">Images</th>
 
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody th:if="${products != null}">
                                     <tr th:each="product,iter : ${products.getContent()}">
                                         <th scope="row" th:text="${iter.count}"></th>
                                         <th scope="row" th:text="${product.pid}"></th>
@@ -85,6 +87,9 @@
                                         </td>
                                         <td>
                                             <a th:href="${'/dashboard/'+product.pid}" class="btn btn-primary btn-m">Update</a>
+                                        </td>
+                                        <td>
+                                            <a th:href="${'/images/'+product.pid}" class="btn btn-success btn-m">Images</a>
                                         </td>
                                     </tr>
 
