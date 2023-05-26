@@ -20,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ImagesController {
     Long pid = 0l;
+
     final ImagesService imageService;
     List<ProductImage> ls = new ArrayList<>();
 
@@ -49,6 +50,14 @@ public class ImagesController {
         int blobLength = (int) blob.length();
         byte[] image = blob.getBytes(1, blobLength);
         return image;
+    }
+
+    @GetMapping("/imageDelete/{imgId}")
+    public String imageDelete(@PathVariable(required=false) Long imgId, Model model){
+        model.addAttribute("imgId", imgId);
+        System.out.println(imgId);
+        imageService.imageDelete(imgId);
+        return "redirect:/images/"+this.pid;
     }
 
 }
