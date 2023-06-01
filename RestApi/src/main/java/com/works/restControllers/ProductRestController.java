@@ -25,4 +25,14 @@ public class ProductRestController {
        return productService.productList();
     }
 
+    @GetMapping("/deleteProduct/{pid}")
+    public boolean delete(@PathVariable Long pid){
+        return productService.deleteProduct(pid);
+    }
+    @PostMapping("/update")
+    public Product update(@RequestBody Product product){
+        return productService.update(product);
+    }
+
+
 }
