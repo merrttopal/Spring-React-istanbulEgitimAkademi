@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -18,7 +19,7 @@ public class ProductRestController {
     private final ProductService productService;
 
     @PostMapping("/save")
-    public ResponseEntity save(@RequestBody /*de serialization*/ Product product) {
+    public ResponseEntity save(@Valid @RequestBody /*de serialization*/ Product product) {
 
         return productService.save(product);
     }
