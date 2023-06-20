@@ -5,12 +5,10 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Category {
+public class Category  extends Base {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long cid;
      private String catName;
-
-
 
 }

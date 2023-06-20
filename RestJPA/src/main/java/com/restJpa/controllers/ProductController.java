@@ -23,4 +23,15 @@ public class ProductController {
         return productService.list();
     }
 
+
+    @GetMapping("/list/{cid}")
+    public ResponseEntity productList(@PathVariable Long cid){
+        return productService.listCat(cid);
+    }
+
+    @GetMapping("/listPage/{cid}")
+    public ResponseEntity productList(@PathVariable Long cid ,@RequestParam(defaultValue = "0") int page){
+        return productService.listCatPage(cid,page);
+    }
+
 }
