@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/product")
 public class ProductController {
 
+
     final ProductService productService;
+
 
     @PostMapping("/save")
     public Product save(@RequestBody Product product){
        return productService.save(product);
     }
+
 
     @GetMapping("/list")
     public ResponseEntity productList(){
@@ -29,9 +32,11 @@ public class ProductController {
         return productService.listCat(cid);
     }
 
+
     @GetMapping("/listPage/{cid}")
     public ResponseEntity productList(@PathVariable Long cid ,@RequestParam(defaultValue = "0") int page){
         return productService.listCatPage(cid,page);
     }
+
 
 }
