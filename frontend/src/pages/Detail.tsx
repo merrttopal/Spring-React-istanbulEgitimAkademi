@@ -61,6 +61,21 @@ function Detail() {
     }).catch(err => {
         console.log(err.message)
     })
+    addLocal(id!)
+   }
+
+   const addLocal = (id:string) =>{
+        const stObj  = localStorage.getItem('basket')
+        if(stObj){
+            //daha önce eklenmiş
+            
+        }else{  
+            const arr = []
+            arr.push(id)
+            const saveStr = JSON.stringify(arr)
+            localStorage.setItem("basket", saveStr)
+
+        }
    }
    
 

@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 function Category() {
   return (
     <>
-        <Navbar />
+        <Navbar {admin:IAdmin} />
         <div>Category</div>
     </>
   )
