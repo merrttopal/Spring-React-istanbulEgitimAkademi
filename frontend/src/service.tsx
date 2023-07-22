@@ -22,6 +22,7 @@ export const singleProduct = (id:string) => {
     return config.get<Product>('products/'+id)
 }
 
+
 export const addCard = ( userId: number, pid: string ) => {
     const sendObj = {
         userId: userId,
@@ -34,3 +35,4 @@ export const addCard = ( userId: number, pid: string ) => {
     }
     return config.post('/carts/add', sendObj)
 }
+

@@ -66,14 +66,23 @@ function Detail() {
 
    const addLocal = (id:string) =>{
         const stObj  = localStorage.getItem('basket')
+
         if(stObj){
+
             //daha önce eklenmiş
-            
-        }else{  
+            var stArr:string[] = []
+            stArr = JSON.parse(stObj) as string[]            
+            stArr.push(id)
+            const str  = JSON.stringify(stArr)
+            localStorage.setItem("basket",str)
+        }
+        else{  
+
             const arr = []
             arr.push(id)
             const saveStr = JSON.stringify(arr)
             localStorage.setItem("basket", saveStr)
+            
 
         }
    }

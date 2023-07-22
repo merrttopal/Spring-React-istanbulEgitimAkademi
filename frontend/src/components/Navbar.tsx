@@ -33,7 +33,7 @@ function Navbar( item: { admin:IAdmin } ) {
                 <NavLink className="nav-link" to='/home'>Home</NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Link</a>
+              <NavLink className="nav-link" to='/basket'>Basket</NavLink>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
