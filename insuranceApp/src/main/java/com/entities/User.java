@@ -1,4 +1,4 @@
-package com.configs.entities;
+package com.entities;
 
 import lombok.Data;
 
