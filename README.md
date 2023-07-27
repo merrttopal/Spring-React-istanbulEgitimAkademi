@@ -1,4 +1,5 @@
-# istanbulEgitimAkademi eğitimi.
+# istanbulEgitimAkademi eğitimi
+
 
 
 # Java and Spring Training
