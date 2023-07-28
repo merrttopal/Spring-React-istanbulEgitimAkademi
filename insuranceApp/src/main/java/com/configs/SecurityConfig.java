@@ -1,9 +1,11 @@
 package com.configs;
 
-import com.works.services.CustomerService;
+
+import com.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,16 +14,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     final PasswordEncoder passwordEncoder;
+    final UserService userService;
 
 
-
-    // sql > login, role
-    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-       // auth.userDetailsService(customerService).passwordEncoder(passwordEncoder);
+        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder);
     }
 
-        // security request > role > map
+
      @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -29,10 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .httpBasic()
         .and()
         .authorizeHttpRequests()
-        .antMatchers("/product/**").hasRole("seller")
-        .antMatchers("/note/**").hasRole("customer")
+        .antMatchers("/product/getPage").hasAnyRole("USER","ADMİN")
+        .antMatchers("/").hasRole("customer")
         .and()///
-                .csrf().disable().formLogin().disable();//security disable
+                .csrf().disable().formLogin().disable();
 
 
 

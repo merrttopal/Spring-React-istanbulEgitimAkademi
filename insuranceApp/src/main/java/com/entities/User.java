@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,7 +19,7 @@ public class User {
     @NotBlank
     @NotEmpty
     @NotNull
-    private String mail;
+    private String email;
 
 
     @Size(min = 6, max = 20)
@@ -27,6 +28,7 @@ public class User {
     @NotNull
     private String password;
 
-
+    @ManyToMany
+    private List<Role> role;
 
 }
