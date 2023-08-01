@@ -52,12 +52,20 @@ public class ProductService {
             return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
         }
     }
-    public Product updateProduct(Long id, Product productDetails) throws ResourceNotFoundException {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(""));
-        product.setPTitle(productDetails.getPTitle());
-        product.setPrice(productDetails.getPrice());
-        return productRepository.save(product);
+    public ResponseEntity updateProduct( Product productDetails) throws ResourceNotFoundException {
+
+        try {
+            Product product = productRepository.saveAndFlush(productDetails);
+            product.setPTitle(productDetails.getPTitle());
+            product.setPrice(productDetails.getPrice());
+             productRepository.save(productDetails);
+            Standard standard = new Standard(true,productDetails);
+            return new ResponseEntity(standard, HttpStatus.OK);
+
+        }catch (Exception exception){
+            Standard standard = new Standard(false,exception.getMessage());
+            return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 package com.Controller;
 
 
+import com.configs.ResourceNotFoundException;
 import com.entities.Product;
 import com.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,9 @@ public class ProductControler {
         return productService.save(product);
     }
 
-
-
+    @PostMapping("/update")
+    public ResponseEntity update(@RequestBody Product product) throws ResourceNotFoundException {
+        return productService.updateProduct(product);
+    }
 
 }
