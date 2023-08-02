@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/product")
@@ -22,12 +24,12 @@ public class ProductControler {
     }
 
     @PostMapping("/save")
-    public ResponseEntity save(@RequestBody Product product){
+    public ResponseEntity save(@RequestBody @Valid Product product){
         return productService.save(product);
     }
 
     @PostMapping("/update")
-    public ResponseEntity update(@RequestBody Product product) throws ResourceNotFoundException {
+    public ResponseEntity update(@RequestBody @Valid Product product) throws ResourceNotFoundException {
         return productService.updateProduct(product);
     }
 
