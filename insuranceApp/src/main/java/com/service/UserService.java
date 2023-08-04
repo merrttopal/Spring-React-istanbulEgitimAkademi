@@ -21,7 +21,8 @@ public class UserService {
     final PasswordEncoder passwordEncoder;
     final UserRepository userRepository;
 
-    public ResponseEntity save (User user){
+
+/*  public ResponseEntity save (User user){
         try {
             userRepository.save(user);
             Standard standard = new Standard(true,user);
@@ -33,4 +34,27 @@ public class UserService {
             return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
         }
     }
+*/
+    public ResponseEntity save(User user){
+
+        Optional<User> optionalCustomer = userRepository.findByEmailEqualsIgnoreCase(user.getEmail());
+        if(optionalCustomer.isPresent()){
+            return null;
+        }else {
+                try {
+                    String newPassword = passwordEncoder.encode(user.getPassword());
+                    user.setPassword(newPassword);
+                    userRepository.save(user);
+                    Standard standard = new Standard(true,user);
+                    return new ResponseEntity(standard, HttpStatus.OK);
+
+                }catch (Exception exception){
+
+                    Standard standard = new Standard(false,exception.getMessage());
+                    return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
+                }
+
+        }
+    }
+
 }

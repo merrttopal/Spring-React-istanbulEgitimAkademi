@@ -40,8 +40,18 @@ public class CategoryService {
             return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
 
         }
+    }
 
+    public ResponseEntity drop (Categories cat){
+        try {
+            repository.delete(cat);
+            Standard standard = new Standard(true,cat);
+            return new ResponseEntity(standard, HttpStatus.OK);
 
+        }catch (Exception exception){
+            Standard standard = new Standard(false,exception.getMessage());
+            return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

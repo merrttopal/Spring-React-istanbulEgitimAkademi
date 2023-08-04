@@ -33,4 +33,10 @@ public class ProductControler {
         return productService.updateProduct(product);
     }
 
+    @GetMapping("/drop/{pid}")
+    public ResponseEntity drop( Product product){
+        return productService.drop(product);
+    }
+
+
 }
