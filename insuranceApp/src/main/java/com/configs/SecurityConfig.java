@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     final PasswordEncoder passwordEncoder;
     final UserService userService;
 
-
+/*
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder);
     }
@@ -34,8 +34,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        .and()///
                 .csrf().disable().formLogin().disable();
 
+    }*/
 
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("user")
+                .password(passwordEncoder.encode("user1Pass"))
+                .authorities("ROLE_USER");
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/login").authenticated()
+                .and().authorizeRequests ()
+                .antMatchers ("/save","/login").permitAll()//access ("hasRole ('ROLE_USER') or hasRole ('ROLE_ADMIN')")
+                .antMatchers ("/").access ("hasRole ('ROLE_USER')")
+                .antMatchers ("/adminPage").access ("hasRole ('ROLE_ADMIN')");
 
 
     }
+
 }
