@@ -1,6 +1,7 @@
 package com.entities;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
+@RequiredArgsConstructor
 public class User {
 
     @Id

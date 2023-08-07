@@ -4,6 +4,7 @@ package com.service;
 import com.configs.Standard;
 import com.entities.User;
 import com.repositories.UserRepository;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,39 +23,59 @@ public class UserService {
     final UserRepository userRepository;
 
 
-/*  public ResponseEntity save (User user){
-        try {
-            userRepository.save(user);
-            Standard standard = new Standard(true,user);
-            return new ResponseEntity(standard, HttpStatus.OK);
+    /*  public ResponseEntity save (User user){
+            try {
+                userRepository.save(user);
+                Standard standard = new Standard(true,user);
+                return new ResponseEntity(standard, HttpStatus.OK);
 
-        }catch (Exception exception){
+            }catch (Exception exception){
 
-            Standard standard = new Standard(false,exception.getMessage());
-            return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
+                Standard standard = new Standard(false,exception.getMessage());
+                return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
+            }
         }
-    }
-*/
-    public ResponseEntity save(User user){
+    */
+    public ResponseEntity save(User user) {
 
         Optional<User> optionalCustomer = userRepository.findByEmailEqualsIgnoreCase(user.getEmail());
-        if(optionalCustomer.isPresent()){
+        if (optionalCustomer.isPresent()) {
             return null;
-        }else {
-                try {
-                    String newPassword = passwordEncoder.encode(user.getPassword());
-                    user.setPassword(newPassword);
-                    userRepository.save(user);
-                    Standard standard = new Standard(true,user);
-                    return new ResponseEntity(standard, HttpStatus.OK);
+        } else {
+            try {
+                String newPassword = passwordEncoder.encode(user.getPassword());
+                user.setPassword(newPassword);
+                userRepository.save(user);
+                Standard standard = new Standard(true, user);
+                return new ResponseEntity(standard, HttpStatus.OK);
 
-                }catch (Exception exception){
+            } catch (Exception exception) {
 
-                    Standard standard = new Standard(false,exception.getMessage());
-                    return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
-                }
+                Standard standard = new Standard(false, exception.getMessage());
+                return new ResponseEntity(standard, HttpStatus.BAD_REQUEST);
+            }
 
         }
     }
 
+    public String userUsername() {
+        User user = new User();
+        try {
+            String username = user.getEmail();
+            return username;
+
+        } catch (Exception exception) {
+            return "";
+        }
+    }
+
+    public String userPass() {
+        User user = new User();
+        try {
+            String pass = user.getPassword();
+            return pass;
+
+        } catch (Exception exception) {
+            return "";        }
+    }
 }
