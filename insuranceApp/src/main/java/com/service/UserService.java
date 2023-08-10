@@ -2,7 +2,7 @@ package com.service;
 
 
 import com.configs.Standard;
-import com.entities.User;
+import com.entities.UserEntitiy;
 import com.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -36,17 +36,17 @@ public class UserService {
             }
         }
     */
-    public ResponseEntity save(User user) {
+    public ResponseEntity save(UserEntitiy userEntitiy) {
 
-        Optional<User> optionalCustomer = userRepository.findByEmailEqualsIgnoreCase(user.getEmail());
+        Optional<UserEntitiy> optionalCustomer = userRepository.findByEmailEqualsIgnoreCase(userEntitiy.getEmail());
         if (optionalCustomer.isPresent()) {
             return null;
         } else {
             try {
-                String newPassword = passwordEncoder.encode(user.getPassword());
-                user.setPassword(newPassword);
-                userRepository.save(user);
-                Standard standard = new Standard(true, user);
+                String newPassword = passwordEncoder.encode(userEntitiy.getPassword());
+                userEntitiy.setPassword(newPassword);
+                userRepository.save(userEntitiy);
+                Standard standard = new Standard(true, userEntitiy);
                 return new ResponseEntity(standard, HttpStatus.OK);
 
             } catch (Exception exception) {
@@ -57,25 +57,30 @@ public class UserService {
 
         }
     }
-
-    public String userUsername() {
-        User user = new User();
-        try {
-            String username = user.getEmail();
-            return username;
-
-        } catch (Exception exception) {
-            return "";
+    public ResponseEntity login(UserEntitiy userEntitiy){
+        Optional<UserEntitiy> optionalUser = userRepository.findByEmailEqualsIgnoreCaseAndPasswordEquals(userEntitiy.getEmail(), userEntitiy.getPassword());
+        if (optionalUser.isPresent()){
+            return new ResponseEntity(optionalUser.get(),HttpStatus.OK);
+        }else{
+            return new ResponseEntity("Mail - Password !",HttpStatus.BAD_REQUEST);
         }
     }
 
-    public String userPass() {
-        User user = new User();
-        try {
-            String pass = user.getPassword();
-            return pass;
-
-        } catch (Exception exception) {
-            return "";        }
+    public UserEntitiy update (UserEntitiy userEntitiy){
+        Optional<UserEntitiy> optionalUser = userRepository.findById(userEntitiy.getUid());
+        if (optionalUser.isPresent()){
+            userRepository.saveAndFlush(userEntitiy);
+            return userEntitiy;
+        }
+        return null;
     }
+    public  boolean delete(Long uid){
+        try {
+            userRepository.deleteById(uid);
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
+    }
+
 }

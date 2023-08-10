@@ -6,6 +6,8 @@ import com.entities.Product;
 import com.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,7 +26,7 @@ public class ProductControler {
     }
 
     @PostMapping("/save")
-    public ResponseEntity save(@RequestBody @Valid Product product){
+    public ResponseEntity save(@RequestBody @Valid   Product product){
         return productService.save(product);
     }
 

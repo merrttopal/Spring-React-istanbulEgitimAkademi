@@ -29,6 +29,7 @@ public class ProductService {
 
     public ResponseEntity save (Product product){
         try {
+            Optional<Product> optionalProduct = productRepository.findBypTitleEquals(product.getPTitle());
             productRepository.save(product);
             Standard standard = new Standard(true,product);
             return new ResponseEntity(standard, HttpStatus.OK);

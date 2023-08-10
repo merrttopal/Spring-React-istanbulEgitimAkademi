@@ -1,16 +1,16 @@
 package com.repositories;
 
-import com.entities.User;
+import com.entities.UserEntitiy;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntitiy, Long> {
 
-    Optional<User> findByEmailEqualsIgnoreCase(String email);
+    Optional<UserEntitiy> findByEmailEqualsIgnoreCase(String email);
 
-    User findByEmailIgnoreCaseEquals(String username);
-    User findByPasswordEquals(String password);
+    Optional<UserEntitiy> findByEmailEqualsIgnoreCaseAndPasswordEquals(String email, String password);
+
 
 
 

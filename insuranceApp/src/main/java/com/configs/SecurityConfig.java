@@ -1,7 +1,6 @@
 package com.configs;
 
 
-import com.entities.User;
 import com.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -40,23 +39,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser(userService.userUsername())
-                .password(passwordEncoder.encode(userService.userPass()))
-                .authorities("ROLE_USER");
+//        auth.inMemoryAuthentication()
+//                .withUser(userService.getUser)
+//               .password(passwordEncoder.encode(userService.userPass()))
+//               .authorities("ROLE_USER");
     }
+
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/user/register").authenticated()
-                .antMatchers ("/user/register").permitAll()
-                .and().authorizeRequests ()//access ("hasRole ('ROLE_USER') or hasRole ('ROLE_ADMIN')")
-                //.antMatchers ("/").access ("hasRole ('ROLE_USER')")
-                //.antMatchers ("/adminPage").access ("hasRole ('ROLE_ADMIN')")
-             ;
-
-
+        http
+                .authorizeRequests()
+                .antMatchers("/product/**").permitAll() ; // Herkese açık olan URL desenleri
+                //.anyRequest().authenticated()  // Diğer tüm URL'ler için kimlik doğrulama gerekiyor
+               // .and()
+//                .formLogin()  // Form tabanlı kimlik doğrulama
+//                .loginPage("/login")  // Özel giriş sayfası
+//                .permitAll()
+               // .and()
+              //  .logout()  // Oturumu kapatma ayarları
+            //    .permitAll();
     }
 
 }
