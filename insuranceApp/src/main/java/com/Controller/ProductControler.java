@@ -3,14 +3,21 @@ package com.Controller;
 
 import com.configs.ResourceNotFoundException;
 import com.entities.Product;
+import com.entities.ProductImage;
+import com.repositories.ProductImageRepository;
+import com.service.ImageService;
 import com.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.sql.SQLException;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,7 +25,9 @@ import javax.validation.Valid;
 public class ProductControler {
 
     final ProductService productService;
-
+    final ImageService imageService;
+    final ProductImageRepository imageRepository;
+    Long pid = 0l;
 
     @GetMapping("/getPage")
     public ResponseEntity productList(){
@@ -40,5 +49,19 @@ public class ProductControler {
         return productService.drop(product);
     }
 
+    @PostMapping("/imageAdd")
+    public ProductImage imageAdd(@RequestParam("image") MultipartFile file) throws IOException, SQLException {
+        ProductImage productImage = new ProductImage();
+        productImage.setPid(this.pid);
+        byte[] fileBytes = file.getBytes();
+        productImage.setImage(fileBytes);
+        return imageService.addImage(productImage);
+    }
+
+    @ResponseBody
+    @GetMapping (value = "/getImage/{index}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getImage( @PathVariable int index ) throws IOException, SQLException {
+        return imageRepository.getImageBy(Long.valueOf(index));
+    }
 
 }
