@@ -22,7 +22,6 @@ public class ProductService {
     public ResponseEntity list( int page){
         Sort sort = Sort.by("price").descending();
         Pageable pageable = PageRequest.of(page,20,sort);
-
         Standard standard = new Standard(true,productRepository.findAll());
         return new ResponseEntity(standard, HttpStatus.OK);
     }
@@ -33,9 +32,7 @@ public class ProductService {
             productRepository.save(product);
             Standard standard = new Standard(true,product);
             return new ResponseEntity(standard, HttpStatus.OK);
-
         }catch (Exception exception){
-
             Standard standard = new Standard(false,exception.getMessage());
             return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
         }

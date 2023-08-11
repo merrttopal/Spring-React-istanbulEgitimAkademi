@@ -2,7 +2,7 @@ package com.Controller;
 
 
 
-import com.entities.UserEntitiy;
+import com.entities.User;
 import com.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +18,13 @@ public class UserController {
     final UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid UserEntitiy userEntitiy){
-       return userService.save(userEntitiy);
+    public ResponseEntity register(@RequestBody @Valid User user){
+       return userService.save(user);
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody UserEntitiy userEntitiy){
-        return userService.login(userEntitiy);
+    public ResponseEntity login(@RequestBody User user){
+        return userService.login(user);
     }
 
     @GetMapping("/delete/{uid}")
@@ -33,8 +33,8 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public UserEntitiy update(@RequestBody UserEntitiy userEntitiy){
-        return userService.update(userEntitiy);
+    public User update(@RequestBody User user){
+        return userService.update(user);
     }
 
 }

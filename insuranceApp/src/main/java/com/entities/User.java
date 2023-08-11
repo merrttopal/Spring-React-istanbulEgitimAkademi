@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @RequiredArgsConstructor
-public class UserEntitiy {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class UserEntitiy {
     private String email;
 
 
-    @Size(min = 6, max = 20)
+    @Size(min = 3, max = 20)
     @NotBlank
     @NotEmpty
     @NotNull

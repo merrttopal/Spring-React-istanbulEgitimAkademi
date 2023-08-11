@@ -17,50 +17,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     final UserService userService;
 
 
-/*
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder);
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }
 
 
      @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-        http
-        .httpBasic()
-        .and()
-//        .authorizeHttpRequests()
-//       .antMatchers("/product/getPage").hasAnyRole("USER","ADMİN")
-//       .antMatchers("/").hasRole("customer")
-//        .and()///
-                .csrf().disable().formLogin().disable();
-
-    }*/
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser(userService.getUser)
-//               .password(passwordEncoder.encode(userService.userPass()))
-//               .authorities("ROLE_USER");
-    }
-
-
-
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/product/**").permitAll() ; // Herkese açık olan URL desenleri
-                //.anyRequest().authenticated()  // Diğer tüm URL'ler için kimlik doğrulama gerekiyor
-               // .and()
-//                .formLogin()  // Form tabanlı kimlik doğrulama
-//                .loginPage("/login")  // Özel giriş sayfası
-//                .permitAll()
-               // .and()
-              //  .logout()  // Oturumu kapatma ayarları
-            //    .permitAll();
-    }
-
+     protected void configure(HttpSecurity http) throws Exception {
+         http
+                 .httpBasic()
+                 .and()
+                 .authorizeHttpRequests()
+                 .antMatchers("/category/save").hasRole("admin")
+                 .antMatchers("/category/update").hasRole("admin")
+                 .antMatchers("/category/delete").hasRole("admin")
+                 .antMatchers("/product/save").hasRole("admin")
+                 .antMatchers("/product/update").hasRole("admin")
+                 .antMatchers("/product/delete/{pid}").hasRole("admin")
+                 .antMatchers("/order/listAll").hasRole("admin")
+                 .and()
+                 .csrf().disable().formLogin().disable();
+     }
 }
