@@ -24,7 +24,6 @@ public class User {
     private String email;
 
 
-    @Size(min = 3, max = 20)
     @NotBlank
     @NotEmpty
     @NotNull

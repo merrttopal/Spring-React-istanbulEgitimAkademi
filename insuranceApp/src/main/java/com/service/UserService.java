@@ -26,7 +26,6 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(noRollbackFor = { Exception.class, RuntimeException.class })
 public class UserService implements UserDetailsService {
 
     final PasswordEncoder passwordEncoder;
