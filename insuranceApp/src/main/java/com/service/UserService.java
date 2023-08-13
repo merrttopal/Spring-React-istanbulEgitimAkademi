@@ -32,25 +32,7 @@ public class UserService implements UserDetailsService {
     final UserRepository userRepository;
 
 
-
-    public ResponseEntity register(User user) {
-        try {
-            if (userRepository.existsByEmailEqualsIgnoreCase(user.getEmail())) {
-                Standard rest = new Standard(false, "This account already exists!");
-                return new ResponseEntity(rest, HttpStatus.BAD_REQUEST);
-            } else {
-                String newPassword = passwordEncoder.encode(user.getPassword());
-                user.setPassword(newPassword);
-                userRepository.save(user);
-                Standard rest = new Standard(true, user);
-                return new ResponseEntity(rest, HttpStatus.OK);
-            }
-
-        } catch (Exception ex) {
-            Standard rest = new Standard(false, ex.getMessage());
-            return new ResponseEntity<>(rest, HttpStatus.BAD_REQUEST);
-        }
-    }
+    
     public ResponseEntity save(User user){
         try{
             Optional<User> optionalUser = userRepository.findByEmailEqualsIgnoreCase(user.getEmail());
