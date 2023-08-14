@@ -20,9 +20,9 @@ import java.util.Optional;
 public class ProductService {
     final ProductRepository productRepository;
     public ResponseEntity list( int page){
-        Sort sort = Sort.by("price").descending();
+        Sort sort = Sort.by("pTitle");
         Pageable pageable = PageRequest.of(page,20,sort);
-        Standard standard = new Standard(true,productRepository.findAll());
+        Standard standard = new Standard(true,productRepository.findAll(pageable));
         return new ResponseEntity(standard, HttpStatus.OK);
     }
 

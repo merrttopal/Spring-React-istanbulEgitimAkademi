@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Page<Product> findByPid(Long pid, Pageable pageable);
+
 
     Optional<Product> findBypTitleEquals(String pTitle);
 }
