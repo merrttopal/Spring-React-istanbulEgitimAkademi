@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "ORDER_TABLE") // Tablo adını "ORDER_TABLE" olarak değiştirdik
+@Table(name = "ORDER_TABLE")
 public class OrderTable {
 
     @Id
@@ -18,11 +18,11 @@ public class OrderTable {
     private Long oid;
 
     @OneToMany
-    @JoinColumn(name = "user_id") // Veritabanında user tablosuna referans oluşturuldu
+    @JoinColumn(name = "user_id")
     private List<User> users;
 
     @OneToMany
-    @JoinColumn(name = "ud_id") // Veritabanında user_detail tablosuna referans oluşturuldu
+    @JoinColumn(name = "ud_id")
     private List<UserDetail> userDetail;
 
     @NotNull

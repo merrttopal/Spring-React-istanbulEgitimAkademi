@@ -3,7 +3,7 @@ package com.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -14,13 +14,8 @@ public class UserDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ud_id") // Fiziksel sütun adını belirttik
+    @Column(name = "ud_id")
     private Long udId;
-
-    @Email
-    @NotBlank
-    @Column(nullable = false) // Veritabanında nullable olmamalı
-    private String email;
 
     @NotBlank
     @Column(nullable = false)
@@ -37,4 +32,8 @@ public class UserDetail {
     @NotBlank
     @Column(nullable = false)
     private String phoneNumber;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String address;
 }

@@ -51,19 +51,42 @@ public class ProductService {
         }
     }
     public ResponseEntity updateProduct( Product productDetails) throws ResourceNotFoundException {
+        Optional<Product> product = productRepository.findById(productDetails.getPid());
 
         try {
-            Product product = productRepository.saveAndFlush(productDetails);
-            product.setPTitle(productDetails.getPTitle());
-            product.setPrice(productDetails.getPrice());
-             productRepository.save(productDetails);
-            Standard standard = new Standard(true,productDetails);
-            return new ResponseEntity(standard, HttpStatus.OK);
+            if(product.isPresent()) {
+                product.get().setPTitle(productDetails.getPTitle());
+                product.get().setPDetail(productDetails.getPDetail());
+                product.get().setPrice(productDetails.getPrice());
+                product.get().setCategories(productDetails.getCategories());
+                productRepository.saveAndFlush(product.get());
+                Standard standard = new Standard(true,product);
+                ResponseEntity responseEntity = new ResponseEntity(standard,HttpStatus.OK);
+                return responseEntity;
+            }
 
         }catch (Exception exception){
             Standard standard = new Standard(false,exception.getMessage());
             return new ResponseEntity(standard,HttpStatus.BAD_REQUEST);
         }
+        return null;
+    }
+
+    public ResponseEntity productDetail(Long id){
+        Optional<Product> product = productRepository.findById(id);
+
+        try{
+            if(product.isPresent()){
+                ResponseEntity responseEntity = new ResponseEntity<>(product.get(),HttpStatus.OK);
+                return responseEntity;
+            }
+
+        }catch (Exception ex){
+            Standard rest = new Standard(false,ex.getMessage());
+            ResponseEntity responseEntity = new ResponseEntity<>(rest,HttpStatus.BAD_REQUEST);
+            return responseEntity;
+        }
+        return null;
     }
 }
 

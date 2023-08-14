@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "USER_TABLE") // Tablo adını "USER_TABLE" olarak değiştirdik
+@Table(name = "USER_TABLE")
 public class User {
 
     @Id
@@ -20,7 +20,7 @@ public class User {
     @Email
     @NotBlank
     @NotNull
-    @Column(unique = true, nullable = false) // Email alanını unique olarak ayarladık
+    @Column(unique = true, nullable = false)
     private String email;
 
     @NotBlank
@@ -28,7 +28,7 @@ public class User {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "user_detail_id") // Veritabanında user_detail tablosuna referans oluşturuldu
+    @JoinColumn(name = "user_detail_id")
     private UserDetail userDetail;
 
     @ManyToMany

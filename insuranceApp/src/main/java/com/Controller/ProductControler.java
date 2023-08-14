@@ -63,4 +63,9 @@ public class ProductControler {
         return imageRepository.getImageBy(Long.valueOf(index));
     }
 
+    @GetMapping("/detail/{pid}")
+    public ResponseEntity detail(@PathVariable Long pid){
+        return productService.productDetail(pid);
+    }
+
 }
