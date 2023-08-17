@@ -33,9 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                  .antMatchers("/category/save").hasRole("admin")
                  .antMatchers("/category/update").hasRole("admin")
                  .antMatchers("/category/delete").hasRole("admin")
-                 .antMatchers("/product/save").hasRole("admin")
-                 .antMatchers("/product/update").hasRole("admin")
-                 .antMatchers("/product/delete/{pid}").hasRole("admin")
+             //    .antMatchers("/product/save").hasRole("admin")
+               //  .antMatchers("/product/update").hasRole("admin")
+                 //.antMatchers("/product/delete/{pid}").hasRole("admin")
                  .antMatchers("/order/list").hasRole("admin")
                  .and()
                  .csrf().disable().formLogin().disable();
